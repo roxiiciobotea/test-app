@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  back:
+    build: ./back
+    command: sh -c "npm install && npm start"
+    environment:
+      - NODE_ENV=development
+      - PORT=8000
+    ports:
+      - '8000:8000'
+    working_dir: /root/back
+
+  # postgres-db:
+  #   image: postgres:9.4.11-alpine
+  #   volumes:
+  #     - ./dbScripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+  #   environment:
+  #     POSTGRES_PASSWORD: dbpass
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_DB: test
+  #   ports:
+  #     - 5437:5437
