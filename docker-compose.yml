@@ -1,15 +1,10 @@
 version: '3'
 
 services:
-  back:
+  test-backend:
     build: ./back
-    command: sh -c "npm install && npm start"
-    environment:
-      - NODE_ENV=development
-      - PORT=8000
     ports:
-      - '8000:8000'
-    working_dir: /root/back
+      - "7000:7000"
 
   # postgres-db:
   #   image: postgres:9.4.11-alpine
