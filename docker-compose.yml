@@ -5,14 +5,10 @@ services:
     build: ./back
     ports:
       - "7000:7000"
+    depends_on:
+      - test-db
 
-  # postgres-db:
-  #   image: postgres:9.4.11-alpine
-  #   volumes:
-  #     - ./dbScripts/init.sql:/docker-entrypoint-initdb.d/init.sql
-  #   environment:
-  #     POSTGRES_PASSWORD: dbpass
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_DB: test
-  #   ports:
-  #     - 5437:5437
+  test-db:
+    build: ./postgres
+    ports: 
+      - "5432:5432"
