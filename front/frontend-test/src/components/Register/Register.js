@@ -2,7 +2,6 @@ import React from 'react';
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import './Login.css';
 
 
 const theme = createMuiTheme({
@@ -19,17 +18,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function onLogin() {
-  alert('Log me in');
-}
-
 
 function onRegister() {
   alert('Register me as a new user');
   // => go to register page
 }
 
-function Login() {
+function Register() {
   const classes = useStyles();
 
   return (
@@ -48,10 +43,13 @@ function Login() {
             margin="normal"
             variant="outlined"
           />
+          <TextField
+            label="Repeat password"
+            type="password"
+            margin="normal"
+            variant="outlined"
+          />
         </div>
-        <Button variant="contained" color="primary" className={classes.margin} onClick={onLogin}>
-          Login
-    </Button>
         <Button variant="contained" color="primary" className={classes.margin} onClick={onRegister}>
           Register
     </Button>
@@ -60,4 +58,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
