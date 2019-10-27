@@ -15,17 +15,17 @@ return sequelize
     const userService = require('../service/UserService').factory(userRepository);
     const userController = require('../endpoints/UserController').factory(userService);
 
+    const healthcheckEndpoint = require('../endpoints/Healthcheck').factory();
+
     const app = require('express')();
 
     app.use(bodyParser.json());
 
+    app.use(healthcheckEndpoint);
+
+    // app.get('/', (req, res) => res.send('Welcome'));
+
     app.use(userController);
-
-    app.get('/', (req, res) => res.send('Welcome'));
-
-    // app.use(function (err, request, response, next) {
-    //   return response.status(err.).send(err.message);
-    // });
 
     app.listen(7000, () => console.log("Started"));
   }).catch(err => {

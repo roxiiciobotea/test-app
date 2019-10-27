@@ -7,19 +7,16 @@ function userController(userService) {
   const router = new express.Router();
 
   router.post('/user', (req, res, next) => {
-    console.log(req.body);
     userService
       .create(req.body)
       .then(result => {
-        console.log(result);
 
         if (result == null) {
-          console.log("INTERNAL_SERVER_ERROR");
           res.status(statusCodes.INTERNAL_SERVER_ERROR);
         } else {
-          console.log("CREATED");
           res.status(statusCodes.CREATED).json(result);
         }
+
         next();
       }).catch(next);
   });
