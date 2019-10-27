@@ -12,3 +12,10 @@ services:
     build: ./postgres
     ports: 
       - "5432:5432"
+
+  frontend-test:
+    build: ./front
+    ports:
+      - "3000:3000"
+    depends_on:
+      - "test-backend"
