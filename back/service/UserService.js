@@ -6,8 +6,11 @@ class User {
   }
 
   create(newUser) {
-    console.log("STILL TRYING");
     return this.userRepository.create(newUser);
+  }
+
+  getByUsername(username) {
+    return this.userRepository.getByUsername(username);
   }
 
 }

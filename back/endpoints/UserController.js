@@ -21,19 +21,20 @@ function userController(userService) {
       }).catch(next);
   });
 
-  // router.get('/user/:id', (req, res, next) => {
-  //   userService
-  //     .find(req.params.id)
-  //     .then(result => {
-  //       if (result == null) {
-  //         res.status(statusCodes.NOT_FOUND);
-  //       } else {
-  //         res.status(statusCodes.OK).json(result);
-  //       }
-  //       next();
-  //     })
-  //     .catch(next);
-  // });
+  router.get('/user/:username', (req, res, next) => {
+    console.log('Searching for ' + req.params);
+    userService
+      .getByUsername(req.params.username)
+      .then(result => {
+        if (result == null) {
+          res.status(statusCodes.NOT_FOUND);
+        } else {
+          res.status(statusCodes.OK).json(result);
+        }
+        next();
+      })
+      .catch(next);
+  });
 
   return router;
 }

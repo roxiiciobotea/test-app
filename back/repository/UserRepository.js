@@ -10,6 +10,10 @@ class UserRepository {
     return this.User
       .create(newUser);
   }
+
+  getByUsername(username) {
+    return this.User.findOne({ where: { userName: username } });
+  }
 }
 
 module.exports = {
