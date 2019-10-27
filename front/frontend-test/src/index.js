@@ -1,8 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
+import './index.css';
+
+import Login from './components/Login/Login';
+// import Register from './components/Register/Register';
+
+import MobxStore from './stores/mobxStore';
+import { Provider } from "mobx-react";
+
+const App = function () {
+  return (
+    <Provider mobxStore={MobxStore}>
+      <div className="App">
+        <header className="App-header">
+          <Login />
+          {/* <Register /> */}
+        </header>
+      </div>
+    </Provider>
+  );
+}
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
