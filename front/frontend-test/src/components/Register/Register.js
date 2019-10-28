@@ -4,6 +4,16 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 class Register extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      userName: '',
+      password: '',
+      repeatedPassword: ''
+    };
+  }
+
   render() {
     return (
       <ThemeProvider theme={theme}>
@@ -14,26 +24,57 @@ class Register extends Component {
               type="text"
               margin="normal"
               variant="outlined"
+              value={this.state.userName}
+              onChange={e => this.setState({
+                userName: e.target.value
+              })}
             />
             <TextField
               label="Password"
               type="password"
               margin="normal"
               variant="outlined"
+              value={this.state.password}
+              onChange={e => this.setState({
+                password: e.target.value
+              })}
             />
             <TextField
               label="Repeat password"
               type="password"
               margin="normal"
               variant="outlined"
+              value={this.state.repeatedPassword}
+              onChange={e => this.setState({
+                repeatedPassword: e.target.value
+              })}
             />
           </div>
-          <Button variant="contained" color="primary" onClick={onRegister}>
+          <Button variant="contained" color="primary" onClick={this.onRegister}>
             Register
       </Button>
         </div>
       </ThemeProvider>
     );
+  }
+
+  onRegister = () => {
+    if (this.state.password === this.state.repeatedPassword) {
+      fetch('http://localhost:7000/user', {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "userName": this.state.userName,
+          "userData": {
+            "password": this.state.password
+          }
+        })
+      }).then(function (response) {
+        console.log(response);
+      });
+    } else {
+      alert("The passwords do not match");
+    }
   }
 }
 
@@ -44,24 +85,5 @@ const theme = createMuiTheme({
     }
   },
 });
-
-// const request = require("request");
-
-function onRegister() {
-  fetch('http://localhost:7000/user', {
-    method: 'post',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      "userName": "test",
-      "userData": {
-        "name": "Jhonny",
-        "surname": "Test",
-        "password": "alabalaportocla"
-      }
-    })
-  }).then(function (response) {
-    console.log(response);
-  });
-}
 
 export default Register;
