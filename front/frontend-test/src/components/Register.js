@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { withRouter } from 'react-router-dom';
 
 class Register extends Component {
   constructor() {
@@ -69,8 +70,14 @@ class Register extends Component {
             "password": this.state.password
           }
         })
-      }).then(function (response) {
-        console.log(response);
+      }).then(response => {
+        this.setState({
+          userName: '',
+          password: '',
+          repeatedPassword: ''
+        });
+
+        this.props.history.push("/");
       });
     } else {
       alert("The passwords do not match");
@@ -86,4 +93,4 @@ const theme = createMuiTheme({
   },
 });
 
-export default Register;
+export default withRouter(Register);

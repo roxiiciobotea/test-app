@@ -13,7 +13,6 @@ class Login extends Component {
     return (
       <ThemeProvider theme={theme}>
         <div>
-          {/* <TextField value={this.props.mobxStore.test} /> */}
           <div style={{ display: "grid" }}>
             <TextField
               label="Username"

@@ -3,8 +3,9 @@ import { inject, observer } from "mobx-react";
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 
-import Login from './Login/Login';
-import Register from './Register/Register';
+import Login from './Login';
+import Register from './Register';
+import Hello from './Hello';
 
 @inject('mobxStore')
 @observer
@@ -16,6 +17,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="/hello" component={Hello} />
           </Switch>
         </BrowserRouter>
       </div>
