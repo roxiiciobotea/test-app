@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { inject, observer } from "mobx-react";
 
+@inject('mobxStore')
+@observer
 class Hello extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <Typography variant="h1" component="h2">
-          Hello
-        </Typography>
+        <h1 style={{ color: "red" }}>Hello, {this.props.mobxStore.name}</h1>
       </ThemeProvider >
     );
   }

@@ -21,15 +21,23 @@ function userController(userService) {
       }).catch(next);
   });
 
-  router.get('/user/:username', (req, res, next) => {
-    console.log('Searching for ' + req.params);
+  router.get('/authenticate', (req, res, next) => {
+    const b64auth = (req.headers.authorization).split(' ')[1];
+    const strauth = new Buffer(b64auth, 'base64').toString();
+    const splitIndex = strauth.indexOf(':');
+
+    const authData = {
+      userName: strauth.substring(0, splitIndex),
+      pw: strauth.substring(splitIndex + 1)
+    };
+
     userService
-      .getByUsername(req.params.username)
+      .authenticateUser(authData)
       .then(result => {
-        if (result == null) {
-          res.status(statusCodes.NOT_FOUND);
+        if (result === true) {
+          res.sendStatus(statusCodes.OK);
         } else {
-          res.status(statusCodes.OK).json(result);
+          res.sendStatus(statusCodes.NOT_FOUND);
         }
         next();
       })

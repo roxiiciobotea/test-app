@@ -12,8 +12,18 @@ class User {
     return this.userRepository.create(newUser);
   }
 
-  getByUsername(username) {
-    return this.userRepository.getByUsername(username);
+  authenticateUser(authData) {
+    return this.userRepository.getByUsername(authData.userName)
+      .then(response => {
+        if (response) {
+          return bcrypt.compare(authData.pw, response.userData.password)
+            .then((res) => {
+              return res;
+            });
+        } else {
+          return false;
+        }
+      });
   }
 
   _encryptPass(pass) {
