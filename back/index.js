@@ -3,7 +3,8 @@
 const bodyParser = require('body-parser');
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize("postgres://dbuser:dbpass@test-db:5432/testdb");
-const initializeModel = require('../persistence').initDataModel;
+const initializeModel = require('./persistence').initDataModel;
+var cors = require('cors');
 
 return sequelize
   .authenticate()
@@ -19,11 +20,10 @@ return sequelize
 
     const app = require('express')();
 
+    app.use(cors());
     app.use(bodyParser.json());
 
     app.use(healthcheckEndpoint);
-
-    // app.get('/', (req, res) => res.send('Welcome'));
 
     app.use(userController);
 

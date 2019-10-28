@@ -7,11 +7,15 @@ services:
       - "7000:7000"
     depends_on:
       - test-db
+    networks:
+      - mynetwork
 
   test-db:
     build: ./postgres
     ports: 
       - "5432:5432"
+    networks:
+      - mynetwork
 
   frontend-test:
     build: ./front
@@ -19,3 +23,8 @@ services:
       - "3000:3000"
     depends_on:
       - "test-backend"
+    networks:
+      - mynetwork
+networks:
+  mynetwork:
+    driver: bridge

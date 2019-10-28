@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-// import { decorate } from 'mobx';
-// import { inject, observer } from 'mobx-react';
 
 class Register extends Component {
   render() {
@@ -47,9 +45,23 @@ const theme = createMuiTheme({
   },
 });
 
+// const request = require("request");
+
 function onRegister() {
-  alert('Register new user');
-  // => go to register page
+  fetch('http://localhost:7000/user', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      "userName": "test",
+      "userData": {
+        "name": "Jhonny",
+        "surname": "Test",
+        "password": "alabalaportocla"
+      }
+    })
+  }).then(function (response) {
+    console.log(response);
+  });
 }
 
 export default Register;

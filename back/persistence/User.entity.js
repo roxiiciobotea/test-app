@@ -1,7 +1,7 @@
 'use strict';
 
 const Sequelize = require('sequelize');
-const constants = require('../../utils/constants');
+const constants = require('../utils/constants');
 
 function getName() {
   return constants.persistence.entity.user.name;

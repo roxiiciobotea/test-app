@@ -3,6 +3,8 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { inject, observer } from "mobx-react";
+import { useHistory } from "react-router-dom";
+
 
 @inject('mobxStore')
 @observer
@@ -28,10 +30,8 @@ class Login extends Component {
           </div>
           <Button variant="contained" color="primary" style={{ margin: '5px' }} onClick={onLogin}>
             Login
-    </Button>
-          <Button variant="contained" color="primary" style={{ margin: '5px' }} onClick={onRegister}>
-            Register
-    </Button>
+          </Button>
+          <RegisterButton />
         </div>
       </ThemeProvider >
     );
@@ -47,13 +47,22 @@ const theme = createMuiTheme({
 });
 
 function onLogin() {
+
   alert('Log me in');
 }
 
+function RegisterButton() {
+  let history = useHistory();
 
-function onRegister() {
-  alert('Register me as a new user');
-  // => go to register page
+  function handleClick() {
+    history.push("/register");
+  }
+
+  return (
+    <Button variant="contained" color="primary" style={{ margin: '5px' }} onClick={handleClick}>
+      Register
+    </Button>
+  );
 }
 
 export default Login;
